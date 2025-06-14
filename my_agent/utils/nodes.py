@@ -1,9 +1,15 @@
+import os
 from functools import lru_cache
+from dotenv import load_dotenv
+
+# Construct the path to the .env file in the parent directory
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+load_dotenv(dotenv_path=dotenv_path)
+
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
 from my_agent.utils.tools import tools
 from langgraph.prebuilt import ToolNode
-
 
 @lru_cache(maxsize=4)
 def _get_model(model_name: str):
